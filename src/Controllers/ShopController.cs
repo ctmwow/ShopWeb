@@ -33,7 +33,7 @@ namespace src.Controllers
             this.connectionString = configuration.GetConnectionString("ConnectionString");
             using (var connection = new MySqlConnection(this.connectionString))
             {
-                this.products = connection.Query<ShopModel>("SELECT * FROM News").ToList();
+                this.products = connection.Query<ShopModel>("SELECT * FROM products").ToList();
             }
         }
     }
