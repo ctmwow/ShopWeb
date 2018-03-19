@@ -9,29 +9,47 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Shop</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 </head>
 <body>
-    <div class="cards row mx-1">
-        @foreach (var product in Model)
-        {
-            <div class="card mb-3 pt-3 col-12 col-sm-8 col-md-5 col-lg-4 col-xl-3">
-                <a href="/Shop/Product/@product.Id">
-                    <img class="img-fluid" src="/../images/banner@(product.Id).jpg" alt="@product.Name (image)">
-                </a>
-
-                <div class="card-body">
-                    <h4 class="card-title">@product.Name - $@product.Price</h4>
-                    <p class="card-text">@product.Description</p>
-                    <a href="/Shop/Product/@product.Id" class="btn btn-info">Read More</a>
-                    @using (Html.BeginForm("AddToCart", "Shop"))
-                    {
-                        @Html.Hidden("productId", product.Id)
-                        <input class="btn btn-primary" type="submit" value="Add To Cart" data-productprice="$@product.Price">
-                    }
-                </div>
-            </div>
-        }
+    <div class="card">
+        <div class="card-header">
+            Product List
+        </div>
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <p>All our products is made by spaghetti.</p>
+                <footer class="blockquote-footer">SoMeBoDy tOuCha Me SPAGHEEEET <cite title="Source Title">PapaBear</cite></footer>
+            </blockquote>
+        </div>
     </div>
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Product Name</th>
+                <th scope="col">About Product</th>
+                <th scope="col">Cost</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @foreach (var product in Model)
+                {
+                    <td>@product.Name</td>
+                    <td>@product.Description</td>
+                    <td>@product.Price</td>
+                    <td><button type="button" class="btn btn-success">Purchase</button></td>
+                }
+            </tr>
+        </tbody>
+    </table>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </body>
 </html>
