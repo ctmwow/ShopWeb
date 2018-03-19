@@ -18,14 +18,14 @@ namespace src.Controllers
         private List<Models.ShopModel> products;
         public ActionResult Get(string id)
         {
-            var newsItem = this.products.SingleOrDefault(x => x.Id == id);
+            var products = this.products.SingleOrDefault(x => x.Id == id);
     
-            if (newsItem == null)
+            if (products == null)
             {
-                return NotFound("No content found.");
+                return NotFound("There are no products available. Wtf?!");
             }
 
-            return View(newsItem);
+            return View(products);
         }
 
         public ShopController(IConfiguration configuration)
@@ -35,7 +35,6 @@ namespace src.Controllers
             {
                 this.products = connection.Query<ShopModel>("SELECT * FROM News").ToList();
             }
-
         }
     }
 }
