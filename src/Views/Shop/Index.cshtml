@@ -12,12 +12,26 @@
     <title>Index</title>
 </head>
 <body>
-    <div>
-        <ul>
-                <li>
-                    item here
-                </li>
-        </ul>
+    <div class="cards row mx-1">
+        @foreach (var product in Model)
+        {
+            <div class="card mb-3 pt-3 col-12 col-sm-8 col-md-5 col-lg-4 col-xl-3">
+                <a href="/Shop/Product/@product.Id">
+                    <img class="img-fluid" src="/../images/banner@(product.Id).jpg" alt="@product.Name (image)">
+                </a>
+
+                <div class="card-body">
+                    <h4 class="card-title">@product.Name - $@product.Price</h4>
+                    <p class="card-text">@product.Description</p>
+                    <a href="/Shop/Product/@product.Id" class="btn btn-info">Read More</a>
+                    @using (Html.BeginForm("AddToCart", "Shop"))
+                    {
+                        @Html.Hidden("productId", product.Id)
+                        <input class="btn btn-primary" type="submit" value="Add To Cart" data-productprice="$@product.Price">
+                    }
+                </div>
+            </div>
+        }
     </div>
 </body>
 </html>

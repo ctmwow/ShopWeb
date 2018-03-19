@@ -1,0 +1,26 @@
+﻿@model news.Models.NewsViewModel
+
+@{
+    Layout = null;
+}
+
+@{
+    ViewBag.Title = $"News | {Model.Header}";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Get</title>
+</head>
+<body>
+    <div>
+
+        <h1>@(Model.Header)</h1>
+
+             @(Model.Body)
+    </div>
+</body>
+</html>
