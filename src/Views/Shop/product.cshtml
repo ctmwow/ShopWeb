@@ -1,15 +1,11 @@
-﻿@model news.Models.NewsViewModel
+@model src.Models.ShopModel
 
 @{
     Layout = null;
 }
 
-@{
-    ViewBag.Title = $"News | {Model.Header}";
-}
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -17,10 +13,7 @@
 </head>
 <body>
     <div>
-
-        <h1>@(Model.Header)</h1>
-
-             @(Model.Body)
+        <h1>@(Model.Name)</h1>
     </div>
 </body>
 </html>

@@ -39,7 +39,7 @@
             <tr>
                 @foreach (var product in Model)
                 {
-                    <td>@product.Name</td>
+                    <td><a href="/shop/product/@(product.Id)">@(product.Name)</a><br /></td>
                     <td>@product.Description</td>
                     <td>@product.Price</td>
                     <td><button type="button" class="btn btn-success">Purchase</button></td>

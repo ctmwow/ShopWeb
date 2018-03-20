@@ -16,16 +16,17 @@ namespace src.Controllers
         public ActionResult Index() => View(this.products);
         private readonly String connectionString;
         private List<Models.ShopModel> products;
-        public ActionResult Get(string id)
+
+        public ActionResult product(string id)
         {
-            var products = this.products.SingleOrDefault(x => x.Id == id);
+            var thisProduct = this.products.SingleOrDefault(x => x.Id == id);
     
-            if (products == null)
+            if (thisProduct == null)
             {
-                return NotFound("There are no products available. Wtf?!");
+                return NotFound("There is no such product.");
             }
 
-            return View(products);
+            return View(thisProduct);
         }
 
         public ShopController(IConfiguration configuration)
