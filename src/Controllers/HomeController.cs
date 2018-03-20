@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using src.Models;
+using System.Web;
 
 namespace src.Controllers
 {
@@ -27,6 +28,25 @@ namespace src.Controllers
             ViewData["Message"] = "Contact Mr. Spaghet!";
 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(Models.UserModel user)
+        {
+            if (ModelState.IsValid)
+            {
+                if (user.IsValid(user.UserName))
+                {
+                    
+                    //FormsAuthentication.SetAuthCookie(user.UserName, user.RememberMe);
+                    return RedirectToAction("Index", "Shop");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Could not find you dude..!");
+                }
+            }
+            return View(user);
         }
 
         public IActionResult Error()
