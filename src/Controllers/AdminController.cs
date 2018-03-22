@@ -33,5 +33,16 @@ namespace src.Controllers
                 this.products = connection.Query<Models.ShopModel>("SELECT * FROM products").ToList();
             }
         }
+
+        // Delete Product
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            using (var connection = new MySqlConnection(this.connectionString))
+            {
+                connection.Query<Models.ShopModel>("DELETE FROM `products` WHERE id = @id", new { id });
+            }
+            return View("Product successfully removed, gg wp");
+        }
     }
 }
