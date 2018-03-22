@@ -2,6 +2,7 @@
 @{
     Layout = null;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    double i = 0;
 }
 
 
@@ -12,8 +13,11 @@
     <ul class="list-group list-group-flush">
         @foreach (var product in Model)
         {
-            <li class="list-group-item">@product.Name</li>
-        }
+           <li class="list-group-item">@product.Name  |  @product.Price</li>
+            i = i + product.Price;
+
+         }
     </ul>
+    <div class="alert alert-success" role="alert" style="margin-bottom: 0;">Total sum: @i</div>
     <button type="button" class="btn btn-info">CheckOut</button>
 </div>
