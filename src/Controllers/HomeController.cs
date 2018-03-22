@@ -13,6 +13,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace src.Controllers
 {
+    public static class onlineList
+    {
+        public static string user { get; set; }
+    }
+
     public class HomeController : Controller
     {
         private readonly string connectionString;
@@ -57,7 +62,7 @@ namespace src.Controllers
         public bool IsValid(string _username)
         {
             var user = this.users.SingleOrDefault(x => x.UserName == _username);
-
+            onlineList.user = _username;
             return (user != null) ? true : false;
         }
 

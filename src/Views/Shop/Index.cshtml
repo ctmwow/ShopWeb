@@ -26,15 +26,25 @@
                 <th scope="col"></th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                @foreach (var product in Model)
-                {
+        @foreach (var product in Model)
+        {
+            <tbody>
+                <tr>
+                 @using (Html.BeginForm("Cart", "Shop", FormMethod.Post))
+                 {
                     <td><a href="/shop/product/@(product.Id)">@(product.Name)</a><br /></td>
-                    <td>@product.Description</td>
-                    <td>@product.Price</td>
-                    <td><button type="button" class="btn btn-success">Purchase</button></td>
+                    <td>
+                        <label for="Answer">@product.Description</label>
+                        
+                    </td>
+                    <td>
+                        <label for="Answer">@product.Price</label>
+                        @Html.Hidden("name", product.Name)
+                        @Html.Hidden("name", product.Price)
+                    </td>
+                    <td><input type="submit" class="btn btn-success" value="Purchase" /></td>
                 }
-            </tr>
-        </tbody>
+                </tr>
+            </tbody>
+        }
     </table>

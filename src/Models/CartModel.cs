@@ -7,7 +7,7 @@ namespace src.Models
 {
     public class CartModel
     {
-        public string Id { get; set; }
+        public string userID { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }
     }
