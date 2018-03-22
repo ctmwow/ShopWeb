@@ -1,0 +1,16 @@
+@model List<src.Models.CartModel>
+@{
+    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<tbody>
+    <tr>
+        @foreach (var product in Model)
+        {
+            <td><a href="/shop/product/@(product.Id)">@(product.Name)</a><br /></td>
+            <td>@product.Price</td>
+        }
+    </tr>
+    <td><button type="button" class="btn btn-success">Check Out</button></td>
+</tbody>

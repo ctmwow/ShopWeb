@@ -5,9 +5,9 @@
 
 hello there
 
-@using (Html.BeginForm())
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
 {
-    @Html.ValidationSummary(true, "Login failed.");
     <div>
         <fieldset>
             <legend>Login</legend>

@@ -6,11 +6,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using src.Models;
 using System.Web;
+using System.Data.SqlClient;
+using Dapper;
+using MySql.Data.MySqlClient;
+using Microsoft.Extensions.Configuration;
 
 namespace src.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly string connectionString;
+        private List<Models.UserModel> users;
+
         public IActionResult Index()
         {
             return View();
@@ -35,18 +42,32 @@ namespace src.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (user.IsValid(user.UserName))
+                if (IsValid(user.UserName))
                 {
-                    
-                    //FormsAuthentication.SetAuthCookie(user.UserName, user.RememberMe);
                     return RedirectToAction("Index", "Shop");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Could not find you dude..!");
+                    return NotFound("Cannot find you, sexy... :(");
                 }
             }
             return View(user);
+        }
+
+        public bool IsValid(string _username)
+        {
+            var user = this.users.SingleOrDefault(x => x.UserName == _username);
+
+            return (user != null) ? true : false;
+        }
+
+        public HomeController(IConfiguration configuration)
+        {
+            this.connectionString = configuration.GetConnectionString("ConnectionString");
+            using (var connection = new MySqlConnection(this.connectionString))
+            {
+                this.users = connection.Query<UserModel>("SELECT * FROM customers").ToList();
+            }
         }
 
         public IActionResult Error()
