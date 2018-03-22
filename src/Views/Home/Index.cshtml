@@ -1,28 +1,35 @@
 @model src.Models.UserModel
+@using src.Controllers
 @{
     ViewData["Title"] = "ShopWeb";
+    string user = onlineList.user;
 }
 
-hello there
+<h1>hello there</h1>
 
 
 @using (Html.BeginForm("Login", "Home", FormMethod.Post))
 {
-    <div>
-        <fieldset>
-            <legend>Login</legend>
-            <div class="editor-label">
-                @Html.LabelFor(u => u.UserName)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(u => u.UserName)
-                @Html.ValidationMessageFor(u => u.UserName)
-            </div>
-            <div class="editor-label">
-                @Html.CheckBoxFor(u => u.RememberMe)
-                @Html.LabelFor(u => u.RememberMe)
-            </div>
-            <input type="submit" value="Log In" />
-        </fieldset>
-    </div>
+    if (user == null)
+    {
+        <div>
+            <fieldset>
+                <legend>Login</legend>
+                <div class="editor-label">
+                    @Html.LabelFor(u => u.UserName)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(u => u.UserName)
+                    @Html.ValidationMessageFor(u => u.UserName)
+                </div>
+                <div class="editor-label">
+                    @Html.CheckBoxFor(u => u.RememberMe)
+                    @Html.LabelFor(u => u.RememberMe)
+                </div>
+                <input type="submit" value="Log In" />
+            </fieldset>
+        </div>
+    }
+
+        <h4>Welcome @user</h4>
 }
