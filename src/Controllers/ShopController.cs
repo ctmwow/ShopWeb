@@ -16,6 +16,7 @@ namespace src.Controllers
         public ActionResult Index() => View(this.products);
         private readonly String connectionString;
         private List<Models.ShopModel> products;
+        private List<Models.ShopModel> ShopList;
 
         public ActionResult product(string id)
         {
@@ -29,12 +30,18 @@ namespace src.Controllers
             return View(thisProduct);
         }
 
+        public ActionResult cart()
+        {
+            return View(ShopList);
+        }
+
         public ShopController(IConfiguration configuration)
         {
             this.connectionString = configuration.GetConnectionString("ConnectionString");
             using (var connection = new MySqlConnection(this.connectionString))
             {
                 this.products = connection.Query<ShopModel>("SELECT * FROM products").ToList();
+                this.ShopList = connection.Query<ShopModel>("SELECT * FROM cart").ToList();
             }
         }
     }
