@@ -4,13 +4,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<tbody>
-    <tr>
+
+<div class="card" style="width: 18rem;">
+    <div class="card-header">
+        Your Shopping Block
+    </div>
+    <ul class="list-group list-group-flush">
         @foreach (var product in Model)
         {
-            <td><a href="/shop/product/@(product.Id)">@(product.Name)</a><br /></td>
-            <td>@product.Price</td>
+            <li class="list-group-item">@product.Name</li>
         }
-    </tr>
-    <td><button type="button" class="btn btn-success">Check Out</button></td>
-</tbody>
+    </ul>
+    <button type="button" class="btn btn-info">CheckOut</button>
+</div>
