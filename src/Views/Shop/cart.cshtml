@@ -13,11 +13,15 @@
     <ul class="list-group list-group-flush">
         @foreach (var product in Model)
         {
-           <li class="list-group-item">@product.Name  |  @product.Price</li>
+            <li class="list-group-item">@product.Name  |  @product.Price</li>
             i = i + product.Price;
 
-         }
+        }
     </ul>
     <div class="alert alert-success" role="alert" style="margin-bottom: 0;">Total sum: @i</div>
-    <button type="button" class="btn btn-info">CheckOut</button>
+    @using (Html.BeginForm("checkout", "Shop", FormMethod.Post))
+    {
+        @Html.Hidden("Price", i)
+        <input type="submit" class="btn btn-info" value="CheckOut" />
+    }
 </div>
