@@ -1,0 +1,48 @@
+@model List<src.Models.ShopModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        Product List (Admin)
+    </div>
+    <div class="card-body">
+        <blockquote class="blockquote mb-0">
+            <p>Remove or update stuff here mr/mrs admin</p>
+        </blockquote>
+    </div>
+</div>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Product Name</th>
+            <th scope="col">About Product</th>
+            <th scope="col">Cost</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    @foreach (var product in Model)
+    {
+        <tbody>
+            <tr>
+               @using (Html.BeginForm("Remove", "Shop", FormMethod.Post))
+                {
+                    <td><a href="/shop/product/@(product.Id)">@(product.Name)</a><br /></td>
+                    <td>
+                        <label for="Answer">@product.Description</label>
+                    </td>
+                    <td>
+                        <label for="Answer">@product.Price</label>
+                        @Html.Hidden("Name", product.Id)
+                    </td>
+                    <td><input type="submit" class="btn btn-warning" value="Edit" /></td>
+                    <td><input type="submit" class="btn btn-danger" value="Remove" /></td>
+                }
+            </tr>
+        </tbody>
+    }
+</table>
