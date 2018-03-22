@@ -49,7 +49,7 @@ namespace src.Controllers
             {
                 if (IsValid(user.UserName))
                 {
-                    return RedirectToAction("Index", "Shop");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -63,7 +63,40 @@ namespace src.Controllers
         {
             var user = this.users.SingleOrDefault(x => x.UserName == _username);
             onlineList.user = _username;
-            return (user != null) ? true : false;
+            return user != null;
+        }
+
+        public bool IsAvailable(string _username)
+        {
+            var available = this.users.SingleOrDefault(x => x.UserName == _username);
+            return available == null;
+        }
+
+        [HttpPost]
+        public ActionResult Register(Models.UserModel user)
+        {
+            if (ModelState.IsValid)
+            {
+                if (IsAvailable(user.UserName))
+                {
+                    using (var connection = new MySqlConnection(this.connectionString))
+                    {
+                        connection.Query<UserModel>("INSERT INTO Customers(`money`, `userName`) VALUES(0, @u)",
+                            new { u =  user.UserName }
+                            );
+
+                        this.users = connection.Query<UserModel>("SELECT * FROM customers").ToList();
+                        onlineList.user = user.UserName;
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+
+                else
+                {
+                    return NotFound("Your name is taken dude.. \n\n Find your own way back.");
+                }
+            }
+            return View(user);
         }
 
         public HomeController(IConfiguration configuration)
