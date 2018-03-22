@@ -19,6 +19,11 @@ namespace src.Controllers
             return View(products);
         }
 
+        public IActionResult AddProduct()
+        {
+            return View();
+        }
+
         // Database Fetch
         public AdminController(IConfiguration configuration)
         {
