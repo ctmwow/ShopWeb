@@ -42,7 +42,19 @@ namespace src.Controllers
             {
                 connection.Query<Models.ShopModel>("DELETE FROM `products` WHERE id = @id", new { id });
             }
-            return View("Product successfully removed, gg wp");
+            return View();
+        }
+
+        // Add Product
+        [HttpPost]
+        public ActionResult Add(Models.ShopModel product)
+        {
+            using (var connection = new MySqlConnection(this.connectionString))
+            {
+                connection.Query<Models.ShopModel>("INSERT INTO products(`name`, `description`, `price`) VALUES(@n, @d, @p)",
+                    new { n = product.Name, d = product.Description, p = product.Price });
+            }
+            return View();
         }
     }
 }
