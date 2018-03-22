@@ -63,5 +63,20 @@ namespace src.Controllers
 
             return View(ShopList);
         }
+
+        [HttpPost]
+        public ActionResult checkout(int checkoutAmount)
+        {
+            using (var connection = new MySqlConnection(this.connectionString))
+            {
+                connection.Query<CartModel>("DELETE FROM cart WHERE userID = @n",
+                    new { n = onlineList.user}
+                    );
+                this.ShopList = connection.Query<CartModel>("SELECT * FROM cart").ToList();
+            }
+
+
+            return View(checkoutAmount);
+        }
     }
 }
