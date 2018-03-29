@@ -21,6 +21,9 @@
                 @if (OnlineList.User != null)
                 {
                     <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Shop" asp-action="Index">Shop</a></li>
+                    <li class="nav-item" style="float: right !important;">
+                        <a class="nav-link" asp-area="" asp-controller="Shop" asp-action="Cart">My Cart (@OnlineList.CartAmount())</a>
+                    </li>
                 }
             </ul>
         </div>
