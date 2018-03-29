@@ -13,9 +13,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace src.Controllers
 {
-    public static class onlineList
+    public static class OnlineList
     {
-        public static string user { get; set; }
+        public static string User { get; set; }
     }
 
     public class HomeController : Controller
@@ -51,7 +51,7 @@ namespace src.Controllers
             {
                 if (IsAvailable(user.UserName))
                 {
-                    onlineList.user = user.UserName; // Add to OnlineList
+                    OnlineList.User = user.UserName; // Add to OnlineList
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -85,7 +85,7 @@ namespace src.Controllers
                         this.users = connection.Query<UserModel>("SELECT * FROM customers").ToList();
 
                         // Add current user to an OnlineList
-                        onlineList.user = user.UserName;
+                        OnlineList.User = user.UserName;
 
                         return RedirectToAction("Index", "Home");
                     }

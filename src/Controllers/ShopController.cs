@@ -13,7 +13,6 @@ namespace src.Controllers
 {
     public class ShopController : Controller
     {
-        // Actions
         public ActionResult Index() => View(this.products);
         private readonly String connectionString;
         private List<Models.ShopModel> products;
@@ -32,11 +31,10 @@ namespace src.Controllers
             return View(thisProduct);
         }
 
-        public ActionResult cart()
+        public ActionResult Cart()
         {
             return View(ShopList);
         }
-
 
         // Database Fetch
         public ShopController(IConfiguration configuration)
@@ -50,13 +48,13 @@ namespace src.Controllers
 
         // Action Handlers
         [HttpPost]
-        public ActionResult cart(Models.CartModel p)
+        public ActionResult Cart(Models.CartModel p)
         {
             using (var connection = new MySqlConnection(this.connectionString))
             {
                 // Add Product into Cart
                 connection.Query<CartModel>("INSERT INTO cart(`UserID`, `Name`, `Price`) VALUES(@user, @item, @p)",
-                    new { user = onlineList.user, item = p.Name, p = p.Price }
+                    new { user = OnlineList.User, item = p.Name, p = p.Price }
                     );
 
                 // Reset List with updated content
@@ -68,17 +66,16 @@ namespace src.Controllers
 
         // Clear Cart upon checkout
         [HttpPost]
-        public ActionResult checkout(int checkoutAmount)
+        public ActionResult Checkout(int checkoutAmount)
         {
             using (var connection = new MySqlConnection(this.connectionString))
             {
                 connection.Query<CartModel>("DELETE FROM cart WHERE userID = @n",
-                    new { n = onlineList.user });
+                    new { n = OnlineList.User });
 
                 // Reset List with updated content 
                 this.ShopList = connection.Query<CartModel>("SELECT * FROM cart").ToList();
             }
-
 
             return View(checkoutAmount);
         }
