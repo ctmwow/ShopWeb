@@ -4,14 +4,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <div class="card" style="width: 48rem; margin: 0 auto;">
-        <img class="card-img-top" src="~/images/banner1.svg">
-        <div class="card-body">
-            <h5 class="card-title">@(Model.Name)</h5>
-            <p class="card-text">@(Model.Description)</p>
-        </div>
-        <div class="card-body">
-            <a href="#" class="card-link"><button type="button" onclick="window.location.href='../'" class="btn btn-secondary">Return</button></a>
-            <a href="#" class="card-link"><button type="button" class="btn btn-success">Purchase</button></a>
-        </div>
+<div class="card" style="width: 48rem; margin: 0 auto;">
+    <img class="card-img-top" src="~/images/banner1.svg">
+    <div class="card-body">
+        <h5 class="card-title">@(Model.Name)</h5>
+        <p class="card-text">@(Model.Description)</p>
     </div>
+    <div class="card-body">
+        <a href="#" class="card-link"><button type="button" onclick="window.location.href='../'" class="btn btn-secondary">Return</button></a>
+        <a href="#" class="card-link"><button type="button" class="btn btn-success">Purchase</button></a>
+    </div>
+</div>

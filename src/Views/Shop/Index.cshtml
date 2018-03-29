@@ -4,46 +4,46 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <div class="card">
-        <div class="card-header">
-            Product List
-        </div>
-        <div class="card-body">
-            <blockquote class="blockquote mb-0">
-                <p>All our products is made by spaghetti.</p>
-                <footer class="blockquote-footer">SoMeBoDy tOuCha Me SPAGHEEEET <cite title="Source Title">PapaBear</cite></footer>
-            </blockquote>
-        </div>
+<div class="card">
+    <div class="card-header">
+        Product List
     </div>
+    <div class="card-body">
+        <blockquote class="blockquote mb-0">
+            <p>All our products is made by spaghetti.</p>
+            <footer class="blockquote-footer">SoMeBoDy tOuCha Me SPAGHEEEET <cite title="Source Title">PapaBear</cite></footer>
+        </blockquote>
+    </div>
+</div>
 
-    <table class="table">
-        <thead class="thead-dark">
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Product Name</th>
+            <th scope="col">About Product</th>
+            <th scope="col">Cost</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    @foreach (var product in Model)
+    {
+        <tbody>
             <tr>
-                <th scope="col">Product Name</th>
-                <th scope="col">About Product</th>
-                <th scope="col">Cost</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        @foreach (var product in Model)
-        {
-            <tbody>
-                <tr>
-                 @using (Html.BeginForm("Cart", "Shop", FormMethod.Post))
-                 {
-                    <td><a href="/shop/product/@(product.Id)">@(product.Name)</a><br /></td>
-                    <td>
-                        <label for="Answer">@product.Description</label>
+                @using (Html.BeginForm("Cart", "Shop", FormMethod.Post))
+                {
+                <td><a href="/shop/product/@(product.Id)">@(product.Name)</a><br /></td>
+                <td>
+                    <label for="Answer">@product.Description</label>
                         
-                    </td>
-                    <td>
-                        <label for="Answer">@product.Price</label>
-                        @Html.Hidden("Name", product.Name)
-                        @Html.Hidden("Price", product.Price)
-                    </td>
-                    <td><input type="submit" class="btn btn-success" value="Purchase" /></td>
-                }
-                </tr>
-            </tbody>
-        }
-    </table>
+                </td>
+                <td>
+                    <label for="Answer">@product.Price</label>
+                    @Html.Hidden("Name", product.Name)
+                    @Html.Hidden("Price", product.Price)
+                </td>
+                <td><input type="submit" class="btn btn-success" value="Purchase" /></td>
+            }
+            </tr>
+        </tbody>
+    }
+</table>
