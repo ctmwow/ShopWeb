@@ -8,7 +8,6 @@ using Microsoft.Extensions.Configuration;
 using Dapper;
 using MySql.Data.MySqlClient;
 
-
 namespace src.Controllers
 {
     public class ShopController : Controller
@@ -52,10 +51,21 @@ namespace src.Controllers
         {
             using (var connection = new MySqlConnection(this.connectionString))
             {
-                // Add Product into Cart
-                connection.Query<CartModel>("INSERT INTO cart(`UserID`, `Name`, `Price`) VALUES(@user, @item, @p)",
-                    new { user = OnlineList.User, item = p.Name, p = p.Price }
-                    );
+                // See if product already is in cart
+                var exists = connection.QuerySingleOrDefault<CartModel>("SELECT name FROM cart WHERE name = @product LIMIT 1",
+                  new { product = p.Name });
+
+                if (exists != null)
+                { // Update Amount
+                    connection.Query<CartModel>("UPDATE cart SET amount = amount +1 WHERE name = @product",
+                   new { product = p.Name });
+                }
+
+                else
+                { // Add Product into Cart
+                    connection.Query<CartModel>("INSERT INTO cart(`UserID`, `Name`, `Price`) VALUES(@user, @item, @p)",
+                        new { user = OnlineList.User, item = p.Name, p = p.Price });
+                }
 
                 // Reset List with updated content
                 this.ShopList = connection.Query<CartModel>("SELECT * FROM cart").ToList();

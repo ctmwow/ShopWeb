@@ -12,7 +12,7 @@
     <ul class="list-group list-group-flush">
         @foreach (var product in Model)
         {
-            <li class="list-group-item">@product.Name  |  @product.Price</li>
+            <li class="list-group-item">@product.Name  |  @product.Price <i style="float: right;">@product.Amount</i></li>
             i = i + product.Price;
         }
     </ul>
