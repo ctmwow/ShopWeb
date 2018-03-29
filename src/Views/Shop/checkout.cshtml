@@ -7,28 +7,27 @@ good job @OnlineList.User, apparently you can buy stuff!<br />
 pls just gief the credit card and stuff so i can sca.. I mean send you the stuff.
 
 <br /><br />
-@using (Html.BeginForm("confirm", "Shop", FormMethod.Post))
-{
-    <div>
-        <fieldset>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                <small id="emailHelp" class="form-text text-muted">We'll share your email with everyone else.</small>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Credit Card</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="12313 123313 42442424">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">CVC Card</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="it's on the backside of your card..!'">
-            </div>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Spam me Emails</label>
-            </div>
-            <input type="submit" class="btn btn-primary" value="Submit" />
-        </fieldset>
-    </div>
-}
+
+<div>
+    <fieldset>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll share your email with everyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Credit Card</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="12313 123313 42442424">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">CVC Card</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="it's on the backside of your card..!'">
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Spam me Emails</label>
+        </div>
+        <input type="submit" onclick="window.location.href='/confirm.cshtml'" class="btn btn-primary" value="Submit" />
+    </fieldset>
+</div>
+
