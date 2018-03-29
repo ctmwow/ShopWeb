@@ -44,7 +44,6 @@ namespace src.Controllers
         // About Page
         public IActionResult About()
         {
-            ViewData["Message"] = "About ShopWeb";
             return View();
         }
 
