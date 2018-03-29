@@ -19,11 +19,11 @@ namespace src.Controllers
         private List<Models.ShopModel> products;
         private List<Models.CartModel> ShopList;
 
-        // SubPages
+        // Specific Product Page
         public ActionResult product(string id)
         {
             var thisProduct = this.products.SingleOrDefault(x => x.Id == id);
-    
+
             if (thisProduct == null)
             {
                 return NotFound("There is no such product.");
@@ -54,24 +54,28 @@ namespace src.Controllers
         {
             using (var connection = new MySqlConnection(this.connectionString))
             {
+                // Add Product into Cart
                 connection.Query<CartModel>("INSERT INTO cart(`UserID`, `Name`, `Price`) VALUES(@user, @item, @p)",
-                    new { user = onlineList.user, item = p.Name, p = p.Price}
+                    new { user = onlineList.user, item = p.Name, p = p.Price }
                     );
+
+                // Reset List with updated content
                 this.ShopList = connection.Query<CartModel>("SELECT * FROM cart").ToList();
             }
-
 
             return View(ShopList);
         }
 
+        // Clear Cart upon checkout
         [HttpPost]
         public ActionResult checkout(int checkoutAmount)
         {
             using (var connection = new MySqlConnection(this.connectionString))
             {
                 connection.Query<CartModel>("DELETE FROM cart WHERE userID = @n",
-                    new { n = onlineList.user}
-                    );
+                    new { n = onlineList.user });
+
+                // Reset List with updated content 
                 this.ShopList = connection.Query<CartModel>("SELECT * FROM cart").ToList();
             }
 

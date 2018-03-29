@@ -34,7 +34,7 @@ namespace src.Controllers
             }
         }
 
-        // Delete Product
+        // Delete Product from Shop
         [HttpPost]
         public ActionResult Delete(int id)
         {
@@ -42,10 +42,11 @@ namespace src.Controllers
             {
                 connection.Query<Models.ShopModel>("DELETE FROM `products` WHERE id = @id", new { id });
             }
+
             return View();
         }
 
-        // Add Product
+        // Add Product to Shop
         [HttpPost]
         public ActionResult Add(Models.ShopModel product)
         {
@@ -54,6 +55,7 @@ namespace src.Controllers
                 connection.Query<Models.ShopModel>("INSERT INTO products(`name`, `description`, `price`) VALUES(@n, @d, @p)",
                     new { n = product.Name, d = product.Description, p = product.Price });
             }
+
             return View();
         }
     }
