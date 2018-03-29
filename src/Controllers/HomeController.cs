@@ -15,7 +15,16 @@ namespace src.Controllers
 {
     public static class OnlineList
     {
+        private static int products = 0;
         public static string User { get; set; }
+        public static int CartAmount ()
+        {
+            return products;
+        }
+        public static int UpdateAmount()
+        {
+            return products = products+1;
+        }
     }
 
     public class HomeController : Controller

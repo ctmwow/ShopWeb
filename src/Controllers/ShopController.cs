@@ -69,6 +69,9 @@ namespace src.Controllers
 
                 // Reset List with updated content
                 this.ShopList = connection.Query<CartModel>("SELECT * FROM cart").ToList();
+
+                // Increase Users Amount of products counter
+                OnlineList.UpdateAmount();
             }
 
             return View(ShopList);
