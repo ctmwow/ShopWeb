@@ -17,10 +17,14 @@ namespace src.Controllers
     {
         private static int products = 0;
         public static string User { get; set; }
-        public static int CartAmount ()
+
+        // Get amount of products in Cart
+        public static int CartAmount()
         {
             return products;
         }
+
+        // Update Product List (+)
         public static int UpdateAmount()
         {
             return products = products+1;
@@ -51,7 +55,6 @@ namespace src.Controllers
             return View();
         }
 
-
         // Login Functionality
         [HttpPost]
         public ActionResult Login(Models.UserModel user)
@@ -66,6 +69,7 @@ namespace src.Controllers
 
                 return NotFound("Cannot find you, sexy... :(");
             }
+
             return View(user);
         }
 
