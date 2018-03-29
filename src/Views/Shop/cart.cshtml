@@ -9,17 +9,20 @@
         Your Shopping Block
         <a href="#" class="card-link"><button type="button" onclick="window.location.href='../'" class="btn btn-secondary">Return</button></a>
     </div>
-    <ul class="list-group list-group-flush">
-        @foreach (var product in Model)
-        {
-            <li class="list-group-item">@product.Name  |  @product.Price <i style="float: right;">@product.Amount</i></li>
-            i = i + product.Price;
-        }
-    </ul>
-    <div class="alert alert-success" role="alert" style="margin-bottom: 0;">Total sum: @i</div>
-    @using (Html.BeginForm("checkout", "Shop", FormMethod.Post))
+    @if (Model != null)
     {
-        @Html.Hidden("Price", i)
-        <input type="submit" class="btn btn-info" value="CheckOut" />
+        <ul class="list-group list-group-flush">
+            @foreach (var product in Model)
+            {
+                <li class="list-group-item">@product.Name  |  @product.Price <i style="float: right;">@product.Amount</i></li>
+                i = i + product.Price;
+            }
+        </ul>
+        <div class="alert alert-success" role="alert" style="margin-bottom: 0;">Total sum: @i</div>
+        @using (Html.BeginForm("checkout", "Shop", FormMethod.Post))
+        {
+            @Html.Hidden("Price", i)
+            <input type="submit" class="btn btn-info" value="CheckOut" />
+        }
     }
 </div>
