@@ -49,7 +49,7 @@ namespace src.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (IsAvailable(user.UserName))
+                if (UserExists(user.UserName))
                 {
                     OnlineList.User = user.UserName; // Add to OnlineList
                     return RedirectToAction("Index", "Home");
@@ -61,10 +61,10 @@ namespace src.Controllers
         }
 
         // Function to see if Name exists in Database
-        public bool IsAvailable(string _username)
+        public bool UserExists(string _username)
         {
             var available = this.users.SingleOrDefault(x => x.UserName == _username);
-            return available == null;
+            return available != null;
         }
 
         // Registration
@@ -73,7 +73,7 @@ namespace src.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (IsAvailable(user.UserName))
+                if (!UserExists(user.UserName))
                 {
                     using (var connection = new MySqlConnection(this.connectionString))
                     {
