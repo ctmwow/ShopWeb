@@ -1,0 +1,16 @@
+@model src.Models.ShopModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>this doesnt work cus ure lazy</h1>
+    <tbody>
+        <tr>
+            <td><a href="/shop/product/@(Model.Id)">@(Model.Name)</a><br /></td>
+            <td>
+                <label for="Answer">@Model.Description</label>
+            </td>
+            <td>
+                <label for="Answer">@Model.Price</label>
+            </td>
+        </tr>
+    </tbody>s

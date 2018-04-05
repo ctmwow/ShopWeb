@@ -58,5 +58,19 @@ namespace src.Controllers
 
             return View();
         }
+
+        // Update Product (Edit/Delete)
+        [HttpPost]
+        public ActionResult update(string id)
+        {
+            var thisProduct = this.products.SingleOrDefault(x => x.Id == id);
+
+            if (thisProduct == null)
+            {
+                return NotFound("There is no such product.");
+            }
+
+            return View(thisProduct);
+        }
     }
 }
