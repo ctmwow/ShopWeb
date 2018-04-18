@@ -18,9 +18,11 @@ Download the repository as a Zip or clone the repository through git.
 
 this project has been tested and verified working by:
 
-* sample text
+* Myself
 
-* sample text
+* You (Soon)
+
+* Github.com/AddeNordh
 
 ## Thank You!
 > I don't wear glasses, even if I can't see sharp.
