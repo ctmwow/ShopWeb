@@ -77,9 +77,19 @@ namespace src.Controllers
             return View(ShopList);
         }
 
-        // Clear Cart upon checkout
+        // Checkout View
         [HttpPost]
         public ActionResult Checkout(int checkoutAmount)
+        {
+            using (var connection = new MySqlConnection(this.connectionString))
+            {
+                this.ShopList = connection.Query<CartModel>("SELECT * FROM cart").ToList();
+            }
+            return View(ShopList);
+        }
+
+        // Confirm Page - Cleart Cart
+        public ActionResult confirm()
         {
             using (var connection = new MySqlConnection(this.connectionString))
             {
@@ -89,13 +99,6 @@ namespace src.Controllers
                 // Reset List with updated content 
                 this.ShopList = connection.Query<CartModel>("SELECT * FROM cart").ToList();
             }
-
-            return View(checkoutAmount);
-        }
-
-        // View for confirmation page
-        public ActionResult confirm()
-        {
             return View();
         }
     }
