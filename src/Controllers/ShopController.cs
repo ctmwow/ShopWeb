@@ -92,5 +92,11 @@ namespace src.Controllers
 
             return View(checkoutAmount);
         }
+
+        // View for confirmation page
+        public ActionResult confirm()
+        {
+            return View();
+        }
     }
 }
